@@ -17,7 +17,13 @@ class Art_project extends Model
         'description',
         'category',
         'state',
+        'partner_id',
+        'state'
+       
     ];
+
+  
+
 
     public function users(){
         return $this->belongsToMany(User::class);

@@ -17,9 +17,8 @@ return new class extends Migration
             $table->float('budget');
             $table->text('description');
             $table->string('category');
-            $table->string('state');
-            $table->unsignedBigInteger('partner_id');
-            $table->foreign('partner_id')->references('id')->on('partners')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->integer('state')->default('0');
+            $table->foreignId('partner_id')->constrained('partners')->cascadeOnDelete()->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

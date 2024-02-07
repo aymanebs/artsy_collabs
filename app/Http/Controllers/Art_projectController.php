@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Art_project;
 use Illuminate\Http\Request;
 
 class Art_projectController extends Controller
@@ -10,8 +11,9 @@ class Art_projectController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('art_project.index');
+    {   
+        $projects=Art_project::get();
+        return view('art_project.index',compact('projects'));
     }
 
     /**
