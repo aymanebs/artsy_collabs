@@ -10,7 +10,8 @@ class Partner extends Model
     use HasFactory;
 
     protected $fillable=[
-        'name'
+        'name',
+        'description'
     ];
 
     public function art_projects(){

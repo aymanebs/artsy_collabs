@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->enum('state', ['en_attente', 'en_cours', 'termine'])->default('en_attente');
             $table->timestamps();
         });
     }

@@ -85,7 +85,7 @@
                 </ol>
                 <div class="card mb-4">
                     <div class="card-body">
-                        <a href="{{url('projects/create')}}" class="btn btn-primary float-end" role="button" disabled>Add</a>
+                        <a href="" class="btn btn-primary float-end" role="button"  data-bs-toggle="modal" data-bs-target="#add-modal" >Add</a>
                     </div>
                 </div>
                 <div class="card mb-4">
@@ -108,26 +108,184 @@
                                     <th>Office</th>
                                     <th>Age</th>
                                     <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Action</th>
+                                    th
                                 </tr>
                             </thead>
 
                         {{-- table body --}}    
-                    </tfoot>
+                    
                     <tbody>
+                        @foreach($projects as $project)
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
+                            
+                            <td>{{$project->title}}</td>
+                            <td>{{$project->budget}}</td>
+                            <td>{{$project->description}}</td>
+                            <td>{{$project->category}}</td>
+                            <td>{{$project->state}}</td>
+                            <td><a href="" type="button" data-id="{{$project->id}}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{$project->id}}" ><i class="fa fa-edit" ></i></a>
+                                
+                                <form action="{{url('projects/' . $project->id . '/delete')}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    
+                                </form>
+                                
+                                <a href="your link here"><i class="fa fa-circle-info"></i></a>
+                            
+                            </td>
                         </tr>
+                     @endforeach    
                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+           
+
+            {{-- Create  Modal --}}
+
+            <div class="modal" id="add-modal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      
+                        <form action="{{url('projects/create')}}" method="POST">
+
+                            @csrf
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control"  type="text" placeholder="Enter your first name" name="title" />
+                                        <label >Title</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input class="form-control"  type="text" placeholder="Enter your last name" name="budget" />
+                                        <label >Budget</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control"  type="text" placeholder="name@example.com" name="description" />
+                                <label >Description</label>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control"  type="text" placeholder="Create a password"  name="category"/>
+                                        <label >Category</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    {{-- <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control"  type="text" placeholder="Confirm password" name="state"/>
+                                        <label >state</label>
+                                    </div> --}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control"  type="text" placeholder="Confirm password" name="partner_id" />
+                                    <label >partner_id</label>
+                                </div>
+                            </div>    
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary" value="Submit" >Save changes</button>
+                    </div>
+                </form>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+                        {{-- Edit  Modal --}}
+              @foreach($projects as $project)
+
+
+            <div class="modal" id="edit-modal-{{$project->id}}" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Edit</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      
+                        <form action="{{url('projects/'. $project->id .'/update')}}" method="POST">
+
+                            @csrf
+                            @method("PUT")
+                    
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control"  type="text" placeholder="Enter your first name" name="title" value="{{$project->title}}" />
+                                        <label >Title</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input class="form-control"  type="text" placeholder="Enter your last name" name="budget" value="{{$project->budget}}" />
+                                        <label >Budget</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control"  type="text" placeholder="name@example.com" name="description" value="{{$project->description}}" />
+                                <label >Description</label>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control"  type="text" placeholder="Create a password"  name="category" value="{{$project->category}}" />
+                                        <label >Category</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    {{-- <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control"  type="text" placeholder="Confirm password" name="state"/>
+                                        <label >state</label>
+                                    </div> --}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control"  type="text" placeholder="Confirm password" name="partner_id" value="{{$project->partner_id}}"/>
+                                    <label >partner_id</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary" value="Submit" >Save changes</button>
+                        </div>
+                    </form>
+                      </div>
+                    </div>
+                  </div>
+
+                  @endforeach
+                  {{-- Modal end  --}}
+
+
+
+
+
         </main>
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">

@@ -30,6 +30,8 @@ Route::get('/dashboard', function () {
 Route::get('/projects',[Art_projectController::class,'index'])->name('projects.index');
 Route::get('projects/create',[Art_projectController::class,'create']);
 Route::post('projects/create',[Art_projectController::class,'store']);
+Route::put('projects/{project}/update',[Art_projectController::class,'update']);
+Route::delete('projects/{project}/delete',[Art_projectController::class,'destroy']);
 
 
 

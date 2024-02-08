@@ -29,7 +29,8 @@ class Art_projectController extends Controller
      */
     public function store(Request $request)
     {
-        Art_project::creat($request->all());
+
+        Art_project::create($request->all());
         return redirect()->route('projects.index');
     }
 
@@ -46,7 +47,7 @@ class Art_projectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -54,7 +55,9 @@ class Art_projectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $project=Art_project::findorfail($id);
+        $project->update($request->all());
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -62,6 +65,8 @@ class Art_projectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project=Art_project::findorfail($id);
+        $project->delete();
+        return redirect()->route('projects.index');
     }
 }

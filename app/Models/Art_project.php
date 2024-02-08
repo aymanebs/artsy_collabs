@@ -18,7 +18,7 @@ class Art_project extends Model
         'category',
         'state',
         'partner_id',
-        'state'
+        
        
     ];
 
