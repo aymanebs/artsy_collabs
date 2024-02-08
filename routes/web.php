@@ -3,6 +3,7 @@
 use App\Http\Controllers\Art_projectController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Art_project;
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,9 @@ Route::get('/dashboard', function () {
 
 // Art_project
 
-Route::get('/projects',[Art_projectController::class,'index']);
+Route::get('/projects',[Art_projectController::class,'index'])->name('projects.index');
+Route::get('projects/create',[Art_projectController::class,'create']);
+Route::post('projects/create',[Art_projectController::class,'store']);
 
 
 

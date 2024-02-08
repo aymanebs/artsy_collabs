@@ -1,87 +1,151 @@
+@extends('layouts.layout')
 
-    @extends('layouts.layout')
-        @section('title','Dashboard')
-        @section('content')
-
-        @section('sidebar')
-        @parent
-        @endsection
-
-        @section('navbar')
-        @parent
-        @endsection
-
-    {{--main--}}
-     
-            <div class="grid grid-cols-1 p-4 gap-4 items-start">
-                <div class="col-span-2 bg-white rounded-md overflow-hidden">
-                    <div>
-                        <div class="flex items-center justify-between p-4 ">
-                            <div>
-                                <h2 class="text-3xl font-semibold text-sec-400">
-                                    Last tasks
-                                </h2>
-                                <p class="text-sec-300">
-                                    <span class="font-semibold text-sec-400">124 total,</span> proceed to
-                                    resolve them
-                                </p>
-                            </div>
-                            <div class="flex items-center gap-10">
-                                <div class="text-center">
-                                    <h2 class="text-3xl font-semibold text-sec-400">45</h2>
-                                    <p class="text-sec-300">Done</p>
-                                </div>
-                                <div class="text-center">
-                                    <h2 class="text-3xl font-semibold text-sec-400">21</h2>
-                                    <p class="text-sec-300">In progress</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" overflow-y-scroll px-4" style="height: calc(100vh - 200px);">
-
-                        <!-- table start -->
-                            <table class="w-full text-right">
-                                <thead class="text-sec-400">
-                                    <tr class="border-b"> 
-                                        <th>id</th>
-                                        <th>Title</th>
-                                        <th>Budget</th>
-                                        <th>Description</th>
-                                        <th>Category</th>
-                                        <th>State</th>
-                                        <th>Created_at</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                
-                                @foreach ($projects as $project)
-                                    
-                              
-                                <tbody class="text-sec-300 ">
-                                    <tr class="h-10 hover:bg-pri-500 hover:text-white">
-                                        <td class="text-left ">{{$project->id}}</td>
-                                        <td>
-                                            {{$project->title}}
-                                            <i class="ri-message-2-line text-green"></i>
-                                            </span>
-                                        </td>
-                                        <td>   {{$project->budget}}</td>
-                                        <td> class="text-green">{{$project->description}}</td>
-                                        <td>{{$project->category}}</td>
-                                        <td>{{$project->state}}</td>
-                                        <td>{{$project->created_at}}</td>
-                                        <td></td>
-                                    </tr>      
-                                </tbody>
-
-                                @endforeach
-                            </table>
-                            <!-- table end -->
-                        </div>
+{{-- sidebar start --}}
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="index.html">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Layouts
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                            <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                        </nav>
                     </div>
-                </div>   
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Pages
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="login.html">Login</a>
+                                    <a class="nav-link" href="register.html">Register</a>
+                                    <a class="nav-link" href="password.html">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">401 Page</a>
+                                    <a class="nav-link" href="404.html">404 Page</a>
+                                    <a class="nav-link" href="500.html">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="sb-sidenav-menu-heading">Addons</div>
+                    <a class="nav-link" href="charts.html">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Charts
+                    </a>
+                    <a class="nav-link" href="tables.html">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Tables
+                    </a>
+                </div>
             </div>
-        </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Start Bootstrap
+            </div>
+        </nav>
     </div>
+    {{-- sidebar end--}} 
 
-    @endsection
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                
+                <h1 class="mt-4">Tables</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Tables</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <a href="{{url('projects/create')}}" class="btn btn-primary float-end" role="button" disabled>Add</a>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        DataTable Example
+                    </div>
+                    
+                    <div class="card-body">
+
+                       
+
+                        {{-- table header --}}
+
+                        <table id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr>
+                            </thead>
+
+                        {{-- table body --}}    
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>Tiger Nixon</td>
+                            <td>System Architect</td>
+                            <td>Edinburgh</td>
+                            <td>61</td>
+                            <td>2011/04/25</td>
+                            <td>$320,800</td>
+                        </tr>
+                           </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        &middot;
+                        <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="js/datatables-simple-demo.js"></script>
+</body>
+</html>

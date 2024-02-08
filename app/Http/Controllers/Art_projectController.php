@@ -21,7 +21,7 @@ class Art_projectController extends Controller
      */
     public function create()
     {
-        //
+        return view('art_project.create');
     }
 
     /**
@@ -29,7 +29,8 @@ class Art_projectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Art_project::creat($request->all());
+        return redirect()->route('projects.index');
     }
 
     /**
