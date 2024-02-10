@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Art_project extends Model
+class Art_project extends Model implements HasMedia
 {
     use HasFactory;
     use SoftDeletes;
+    use InteractsWithMedia;
 
     protected $fillable=[
         'title',
@@ -29,7 +32,7 @@ class Art_project extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function partners(){
+    public function partner(){
         return $this->belongsTo(Partner::class);
     }
 }

@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Art_project;
 use App\Models\Partner;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class Art_projectController extends Controller
+class PartnerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        $artists=User::get();
-        $partners=Partner::get();
-        $projects=Art_project::get();
-        return view('art_project.index',compact('projects','partners','artists'));
+    {
+      $partners=Partner::get();
+      return view('partner.index',compact('partners'));
     }
 
     /**
@@ -25,7 +21,7 @@ class Art_projectController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -33,11 +29,8 @@ class Art_projectController extends Controller
      */
     public function store(Request $request)
     {
-
-        $project=Art_project::create($request->all());
-        $project->users()->sync($request->input('artists'));
-        $project->addMediaFromRequest('image')->toMediaCollection('images');
-        return redirect()->route('projects.index');
+        Partner::create($request->all());
+        return redirect()->route('partners.index');
     }
 
     /**
@@ -53,7 +46,7 @@ class Art_projectController extends Controller
      */
     public function edit(string $id)
     {
-        
+        //
     }
 
     /**
@@ -61,10 +54,9 @@ class Art_projectController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $project=Art_project::findorfail($id);
+        $project=Partner::findorfail($id);
         $project->update($request->all());
-        $project->users()->sync($request->input('artists'));
-        return redirect()->route('projects.index');
+        return redirect()->route('partners.index');
     }
 
     /**
@@ -72,8 +64,8 @@ class Art_projectController extends Controller
      */
     public function destroy(int $id)
     {
-        $project=Art_project::findorfail($id);
-        $project->delete();
-        return redirect()->route('projects.index');
+        $user=Partner::findorfail($id);
+        $user->delete();
+        return redirect()->route('partners.index');
     }
 }

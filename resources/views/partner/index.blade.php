@@ -107,32 +107,27 @@
                         <table id="datatablesSimple">
                             <thead>
                                 <tr>
-                                    <th>id</th>
-                                    <th>title</th>
-                                    <th>budget</th>
-                                    <th>description</th>
-                                    <th>category</th>
-                                    <th>state</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
                                     <th>Action</th>
-                                   
+                                    th
                                 </tr>
                             </thead>
 
                         {{-- table body --}}    
                     
                     <tbody>
-                        @foreach($projects as $project)
-
+                        @foreach($partners as $partner)
+                       
                         <tr>
-                            <td>{{$project->id}}</td>
-                            <td>{{$project->title}}</td>
-                            <td>{{$project->budget}}</td>
-                            <td>{{$project->description}}</td>
-                            <td>{{$project->category}}</td>
-                            <td>{{$project->state}}</td>
-                            <td><a  type="button" data-id="{{$project->id}}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{$project->id}}" ><i class="fa fa-edit" ></i></a>
+                            
+                            <td>{{$partner->id}}</td>
+                            <td>{{$partner->name}}</td>
+                            <td>{{$partner->description}}</td>
+                            <td><a  type="button" data-id="{{$partner->id}}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{$partner->id}}" ><i class="fa fa-edit" ></i></a>
                                 <a ><i class="fa fa-circle-info"></i></a>
-                                <form action="{{url('projects/' . $project->id . '/delete')}}" method="POST" class="d-inline">
+                                <form action="{{url('partners/' . $partner->id . '/delete')}}" method="POST" class="d-inline">
                                     @csrf
                                     @method('delete')
                                     <button type="submit"><i class="fa fa-trash"></i></button>
@@ -143,6 +138,7 @@
                             
                             </td>
                         </tr>
+                       
                      @endforeach    
                            </tbody>
                         </table>
@@ -162,66 +158,25 @@
                     </div>
                     <div class="modal-body">
                       
-                        <form action="{{url('projects/create')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{url('partners/create')}}" method="POST">
 
                             @csrf
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control"  type="text" placeholder="Enter your first name" name="title" />
-                                        <label >Title</label>
+                                        <input class="form-control"  type="text" placeholder="Enter your first name" name="name" />
+                                        <label >Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input class="form-control"  type="text" placeholder="Enter your last name" name="budget" />
-                                        <label >Budget</label>
+                                        <input class="form-control"  type="text" placeholder="Enter your last name" name="description" />
+                                        <label >Description</label>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input class="form-control"  type="text" placeholder="name@example.com" name="description" />
-                                <label >Description</label>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control"  type="text" placeholder="Create a password"  name="category"/>
-                                        <label >Category</label>
-                                    </div>
-                                </div>
-                             
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col md-6">
-                                    <select name="artists[]" id="" class="form-select" multiple>
-                                        <label>Artists</label>
-                                        @foreach($artists as $artist)
-                                        @if($artist->role_id == 2)
-                                        <option value="{{$artist->id}}">{{$artist->name}}</option>
-                                        @endif
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
                            
-                           <div class="row mb-3">
-                            <div class="col md-6"></div>
-                            <select class="form-select"  name="partner_id">
-                                <label>Partner</label>
-                                @foreach($partners as $partner)
-                                <option value="{{$partner->id}}">{{$partner->name}}</option>
-                                @endforeach
-                              </select>
-                           </div>
-                          
-                            
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3 mb-md-0">
-                                    <input type="file" class="form-control" name="image" >
-                            </div>
-
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -231,16 +186,16 @@
                   </div>
                 </div>
               </div>
-            </div>
+
 
 
 
 
                         {{-- Edit  Modal --}}
-              @foreach($projects as $project)
+              @foreach($partners as $partner)
 
 
-            <div class="modal" id="edit-modal-{{$project->id}}" tabindex="-1">
+            <div class="modal" id="edit-modal-{{$partner->id}}" tabindex="-1">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -249,7 +204,7 @@
                     </div>
                     <div class="modal-body">
                       
-                        <form action="{{url('projects/'. $project->id .'/update')}}" method="POST">
+                        <form action="{{url('partners/'. $partner->id .'/update')}}" method="POST">
 
                             @csrf
                             @method("PUT")
@@ -258,54 +213,24 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control"  type="text" placeholder="Enter your first name" name="title" value="{{$project->title}}" />
-                                        <label >Title</label>
+                                        <input class="form-control"  type="text" placeholder="Enter your first name" name="name" value="{{$partner->name}}" />
+                                        <label >Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input class="form-control"  type="text" placeholder="Enter your last name" name="budget" value="{{$project->budget}}" />
-                                        <label >Budget</label>
+                                        <input class="form-control"  type="text" placeholder="Enter your last name" name="description" value="{{$partner->description}}" />
+                                        <label >Description</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input class="form-control"  type="text" placeholder="name@example.com" name="description" value="{{$project->description}}" />
-                                <label >Description</label>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control"  type="text" placeholder="Create a password"  name="category" value="{{$project->category}}" />
-                                        <label >Category</label>
-                                    </div>
+                            {{-- <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input class="form-control"  type="text" placeholder="Enter your last name" name="password" value="{{$artist->password}}" />
+                                    <label >Password</label>
                                 </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col md-6">
-                                    <select name="artists[]" id="" class="form-select" multiple>
-                                        <label>Artists</label>
-                                       
-                                        @foreach($artists as $artist )
-                                        @if($artist->role_id == 2)
-                                        <option value="{{$artist->id}}" @if($project->users->contains($artist->id)) selected @endif >{{$artist->name}}</option>
-                                        @endif
-                                        @endforeach
-                                    
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col md-6"></div>
-                                <select class="form-select"  name="partner_id">
-                                    <label >Partner</label>
-                                    
-                                    <option value="{{$project->partner->id}}">{{$project->partner->name}}</option>
-                                
-                                  </select>
-                               </div>
+                            </div> --}}
+                           
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

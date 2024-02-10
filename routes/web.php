@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Art_projectController;
+use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Art_project;
 use App\Models\Role;
@@ -27,11 +29,33 @@ Route::get('/dashboard', function () {
 
 // Art_project
 
-Route::get('/projects',[Art_projectController::class,'index'])->name('projects.index');
-Route::get('projects/create',[Art_projectController::class,'create']);
-Route::post('projects/create',[Art_projectController::class,'store']);
-Route::put('projects/{project}/update',[Art_projectController::class,'update']);
-Route::delete('projects/{project}/delete',[Art_projectController::class,'destroy']);
+    Route::get('/projects',[Art_projectController::class,'index'])->name('projects.index');
+    Route::get('projects/create',[Art_projectController::class,'create']);
+    Route::post('projects/create',[Art_projectController::class,'store']);
+    Route::put('projects/{project}/update',[Art_projectController::class,'update']);
+    Route::delete('projects/{project}/delete',[Art_projectController::class,'destroy']);
+
+
+// Artists
+
+    Route::get('/artists',[ArtistController::class,'index'])->name('artists.index');
+    Route::get('artists/create',[ArtistController::class,'create']);
+    Route::post('artists/create',[ArtistController::class,'store']);
+    Route::patch('artists/{artist}/update',[ArtistController::class,'update']);
+    Route::delete('artists/{artist}/delete',[ArtistController::class,'destroy']);
+
+
+// Partners
+
+Route::get('/partners',[PartnerController::class,'index'])->name('partners.index');
+Route::get('partners/create',[PartnerController::class,'create']);
+Route::post('partners/create',[PartnerController::class,'store']);
+Route::put('partners/{partner}/update',[PartnerController::class,'update']);
+Route::delete('partners/{partner}/delete',[PartnerController::class,'destroy']);
+
+
+
+
 
 
 
