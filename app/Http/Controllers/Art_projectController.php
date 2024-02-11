@@ -62,7 +62,9 @@ class Art_projectController extends Controller
     public function update(Request $request, int $id)
     {
         $project=Art_project::findorfail($id);
+        $project->clearMediaCollection('images');
         $project->update($request->all());
+        $project->addMediaFromRequest('image')->toMediaCollection('images');
         $project->users()->sync($request->input('artists'));
         return redirect()->route('projects.index');
     }
@@ -73,6 +75,7 @@ class Art_projectController extends Controller
     public function destroy(int $id)
     {
         $project=Art_project::findorfail($id);
+        $project->users()->detach();
         $project->delete();
         return redirect()->route('projects.index');
     }

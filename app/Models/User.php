@@ -47,7 +47,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function art_projects(){
+    public function projects(){
         return $this->belongsToMany(Art_project::class);
     }
 }

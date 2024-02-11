@@ -107,11 +107,10 @@
                         <table id="datatablesSimple">
                             <thead>
                                 <tr>
+                                    <th>Id</th>
                                     <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Action</th>
-                                    th
+                                    <th>Email</th>
+                                    <th>Action</th>  
                                 </tr>
                             </thead>
 
@@ -176,12 +175,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="row mb-3">
+                            <div class="col-md-12">
                                 <div class="form-floating">
                                     <input class="form-control"  type="text" placeholder="Enter your last name" name="password" value="" />
                                     <label >Password</label>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="">Projects</label>
+                                <select name="projects[]" id="" multiple>
+                                    @foreach($projects as $project)
+                                    <option value="{{$project->id}}">{{$project->title}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -223,7 +236,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-floating">
+                                    <div class="form-floating mb-3 mb-md-0 ">
                                         <input class="form-control"  type="text" placeholder="Enter your last name" name="email" value="{{$artist->email}}" />
                                         <label >Email</label>
                                     </div>
@@ -236,6 +249,21 @@
                                 </div>
                             </div> --}}
                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    
+                                        <label for="">Projects</label>
+                                        <select name="projects[]" id="" multiple>
+                                            @foreach($projects as $project)
+                                            <option value="{{$project->id}}" @if($artist->projects->contains($project->id)) selected @endif>{{$project->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                               
+                            </div>
+
+
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

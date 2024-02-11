@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Art_projectController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Art_project;
@@ -47,12 +48,15 @@ Route::get('/dashboard', function () {
 
 // Partners
 
-Route::get('/partners',[PartnerController::class,'index'])->name('partners.index');
-Route::get('partners/create',[PartnerController::class,'create']);
-Route::post('partners/create',[PartnerController::class,'store']);
-Route::put('partners/{partner}/update',[PartnerController::class,'update']);
-Route::delete('partners/{partner}/delete',[PartnerController::class,'destroy']);
+    Route::get('/partners',[PartnerController::class,'index'])->name('partners.index');
+    Route::get('partners/create',[PartnerController::class,'create']);
+    Route::post('partners/create',[PartnerController::class,'store']);
+    Route::put('partners/{partner}/update',[PartnerController::class,'update']);
+    Route::delete('partners/{partner}/delete',[PartnerController::class,'destroy']);
 
+//home
+
+    Route::get('/home',[HomeController::class,'index']);
 
 
 

@@ -107,11 +107,11 @@
                         <table id="datatablesSimple">
                             <thead>
                                 <tr>
+                                    <th>Id</th>
                                     <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
+                                    <th>Description</th>
                                     <th>Action</th>
-                                    th
+                                 
                                 </tr>
                             </thead>
 
@@ -172,10 +172,21 @@
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input class="form-control"  type="text" placeholder="Enter your last name" name="description" />
-                                        <label >Description</label>
+                                        <label>Description</label>
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="">Projects</label>
+                                    <select name="projects[]" id="">
+                                        @foreach($projects as $project)
+                                        <option value="{{$project->id}}">{{$project->title}} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div> --}}
                            
                     </div>
                     <div class="modal-footer">

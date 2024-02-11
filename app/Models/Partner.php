@@ -15,6 +15,6 @@ class Partner extends Model
     ];
 
     public function art_projects(){
-        $this->hasmany(Art_project::class);
+        return $this->hasmany(Art_project::class,'');
     }
 }

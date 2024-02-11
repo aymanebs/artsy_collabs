@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Art_project;
 use App\Models\Partner;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,9 @@ class PartnerController extends Controller
      */
     public function index()
     {
+      $projects=Art_project::get();
       $partners=Partner::get();
-      return view('partner.index',compact('partners'));
+      return view('partner.index',compact('partners','projects'));
     }
 
     /**
@@ -29,7 +31,9 @@ class PartnerController extends Controller
      */
     public function store(Request $request)
     {
-        Partner::create($request->all());
+        $partner=Partner::create($request->all());
+        $projects=$request->input('projects');
+        
         return redirect()->route('partners.index');
     }
 

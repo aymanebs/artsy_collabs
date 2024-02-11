@@ -194,9 +194,9 @@
                              
                             </div>
                             <div class="row mb-3">
-                                <div class="col md-6">
+                                <div class="col-md-6">
+                                    <label>Artists</label>
                                     <select name="artists[]" id="" class="form-select" multiple>
-                                        <label>Artists</label>
                                         @foreach($artists as $artist)
                                         @if($artist->role_id == 2)
                                         <option value="{{$artist->id}}">{{$artist->name}}</option>
@@ -208,8 +208,8 @@
                            
                            <div class="row mb-3">
                             <div class="col md-6"></div>
+                            <label>Partner</label>
                             <select class="form-select"  name="partner_id">
-                                <label>Partner</label>
                                 @foreach($partners as $partner)
                                 <option value="{{$partner->id}}">{{$partner->name}}</option>
                                 @endforeach
@@ -221,8 +221,8 @@
                                 <div class="form-floating mb-3 mb-md-0">
                                     <input type="file" class="form-control" name="image" >
                             </div>
+                           </div>
 
-                    </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                       <button type="submit" class="btn btn-primary" value="Submit" >Save changes</button>
@@ -249,7 +249,7 @@
                     </div>
                     <div class="modal-body">
                       
-                        <form action="{{url('projects/'. $project->id .'/update')}}" method="POST">
+                        <form action="{{url('projects/'. $project->id .'/update')}}" method="POST" enctype="multipart/form-data">
 
                             @csrf
                             @method("PUT")
@@ -284,8 +284,9 @@
 
                             <div class="row mb-3">
                                 <div class="col md-6">
+                                    <label>Artists</label>
                                     <select name="artists[]" id="" class="form-select" multiple>
-                                        <label>Artists</label>
+                                      
                                        
                                         @foreach($artists as $artist )
                                         @if($artist->role_id == 2)
@@ -299,14 +300,22 @@
 
                             <div class="row mb-3">
                                 <div class="col md-6"></div>
+                                <label >Partner</label>
                                 <select class="form-select"  name="partner_id">
-                                    <label >Partner</label>
-                                    
-                                    <option value="{{$project->partner->id}}">{{$project->partner->name}}</option>
-                                
+                                    @foreach($partners as $partner)
+                                    <option value="{{$partner->id}}" @if ($project->partner->id == $partner->id) selected @endif>{{$partner->name}}</option>
+                                    @endforeach
                                   </select>
                                </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3 mb-md-0">
+                                <input type="file" class="form-control" name="image"  >
+                        </div>
+                       </div>
+
+                        
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <button type="submit" class="btn btn-primary" value="Submit" >Save changes</button>

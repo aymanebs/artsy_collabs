@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Art_project;
 use App\Models\Artist;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,8 +15,9 @@ class ArtistController extends Controller
      */
     public function index()
     {
+        $projects=Art_project::get();
         $artists=User::get();
-        return view('artist.index',compact('artists'));
+        return view('artist.index',compact('artists','projects'));
     }
 
     /**
@@ -31,9 +33,10 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {   
-        $users=$request->all();
-        $users['password'] = Hash::make($request->password);
-        User::create($users);
+        $data=$request->all();
+        $data['password'] = Hash::make($request->password); 
+        $user=User::create($data);
+        $user->projects()->sync($request->input('projects'));
         return redirect()->route('artists.index');
     }
 
@@ -60,6 +63,7 @@ class ArtistController extends Controller
     {
         $user=User::findorfail($id);
         $user->update($request->all());
+        $user->projects()->sync($request->input('projects'));
         return redirect()->route('artists.index');
     }
 
@@ -69,6 +73,7 @@ class ArtistController extends Controller
     public function destroy(int $id)
     {
         $user=User::findorfail($id);
+        $user->projects()->detach();
         $user->delete();
         return redirect()->route('artists.index');
     }
