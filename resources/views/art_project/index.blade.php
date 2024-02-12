@@ -132,7 +132,10 @@
                             <td>{{$project->state}}</td>
                             <td><a  type="button" data-id="{{$project->id}}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{$project->id}}" ><i class="fa fa-edit" ></i></a>
                                 <a ><i class="fa fa-circle-info"></i></a>
-                                <form action="{{url('projects/' . $project->id . '/delete')}}" method="POST" class="d-inline">
+
+                            {{-- delete form --}}
+                            
+                                <form action="{{route('projects.destroy', ['project'=>$project->id])}}" method="POST" class="d-inline">
                                     @csrf
                                     @method('delete')
                                     <button type="submit"><i class="fa fa-trash"></i></button>
@@ -151,7 +154,7 @@
             </div>
            
 
-            {{-- Create  Modal --}}
+            {{-- Store  Modal --}}
 
             <div class="modal" id="add-modal" tabindex="-1">
                 <div class="modal-dialog">
@@ -162,7 +165,7 @@
                     </div>
                     <div class="modal-body">
                       
-                        <form action="{{url('projects/create')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('projects.store')}}" method="POST" enctype="multipart/form-data">
 
                             @csrf
 
@@ -236,7 +239,7 @@
 
 
 
-                        {{-- Edit  Modal --}}
+                        {{-- Update  Modal --}}
               @foreach($projects as $project)
 
 
@@ -249,7 +252,7 @@
                     </div>
                     <div class="modal-body">
                       
-                        <form action="{{url('projects/'. $project->id .'/update')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('projects.update',['project' => $project->id])}}" method="POST" enctype="multipart/form-data">
 
                             @csrf
                             @method("PUT")

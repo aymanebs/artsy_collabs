@@ -59,22 +59,20 @@ class ArtistController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request,User $artist)
     {
-        $user=User::findorfail($id);
-        $user->update($request->all());
-        $user->projects()->sync($request->input('projects'));
+        $artist->update();
+        $artist->projects()->sync($request->input('projects'));
         return redirect()->route('artists.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(User $artist)
     {
-        $user=User::findorfail($id);
-        $user->projects()->detach();
-        $user->delete();
+        $artist->projects()->detach();
+        $artist->delete();
         return redirect()->route('artists.index');
     }
 }

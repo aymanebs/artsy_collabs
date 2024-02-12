@@ -59,9 +59,8 @@ class Art_projectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, Art_project $project)
     {
-        $project=Art_project::findorfail($id);
         $project->clearMediaCollection('images');
         $project->update($request->all());
         $project->addMediaFromRequest('image')->toMediaCollection('images');
@@ -72,9 +71,9 @@ class Art_projectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(Art_project $project)
     {
-        $project=Art_project::findorfail($id);
+       
         $project->users()->detach();
         $project->delete();
         return redirect()->route('projects.index');

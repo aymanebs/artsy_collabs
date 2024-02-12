@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use Illuminate\Auth\Access\Gate;
+use Illuminate\Contracts\Auth\Access\Gate as AccessGate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate as FacadesGate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,6 +25,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->registerPolicies();
+
+        FacadesGate::define('access.dashboard',function($user){
+            return $user->hasPermissionTo('access.dashboard');
+        });
     }
 }

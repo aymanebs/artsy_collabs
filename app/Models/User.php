@@ -50,4 +50,15 @@ class User extends Authenticatable
     public function projects(){
         return $this->belongsToMany(Art_project::class);
     }
+
+    public function hasPermissionTo($permission)
+    {
+      
+            if ($this->role->permissions->contains('name', $permission)) {
+                return true;
+            }
+      
+
+        return false;
+    }
 }

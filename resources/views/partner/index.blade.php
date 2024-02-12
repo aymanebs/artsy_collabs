@@ -127,7 +127,7 @@
                             <td>{{$partner->description}}</td>
                             <td><a  type="button" data-id="{{$partner->id}}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{$partner->id}}" ><i class="fa fa-edit" ></i></a>
                                 <a ><i class="fa fa-circle-info"></i></a>
-                                <form action="{{url('partners/' . $partner->id . '/delete')}}" method="POST" class="d-inline">
+                                <form action="{{route('partners.destroy',['partner' => $partner->id])}}" method="POST" class="d-inline">
                                     @csrf
                                     @method('delete')
                                     <button type="submit"><i class="fa fa-trash"></i></button>
@@ -147,7 +147,7 @@
             </div>
            
 
-            {{-- Create  Modal --}}
+            {{-- Store  Modal --}}
 
             <div class="modal" id="add-modal" tabindex="-1">
                 <div class="modal-dialog">
@@ -158,7 +158,7 @@
                     </div>
                     <div class="modal-body">
                       
-                        <form action="{{url('partners/create')}}" method="POST">
+                        <form action="{{route('partners.store',['partner'=> $partner->id])}}" method="POST">
 
                             @csrf
 
@@ -202,7 +202,7 @@
 
 
 
-                        {{-- Edit  Modal --}}
+                        {{-- Update  Modal --}}
               @foreach($partners as $partner)
 
 
@@ -215,7 +215,7 @@
                     </div>
                     <div class="modal-body">
                       
-                        <form action="{{url('partners/'. $partner->id .'/update')}}" method="POST">
+                        <form action="{{route('partners.update',['partner'=> $partner->id])}}" method="POST">
 
                             @csrf
                             @method("PUT")

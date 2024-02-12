@@ -126,7 +126,10 @@
                             <td>{{$artist->email}}</td>
                             <td><a  type="button" data-id="{{$artist->id}}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{$artist->id}}" ><i class="fa fa-edit" ></i></a>
                                 <a ><i class="fa fa-circle-info"></i></a>
-                                <form action="{{url('artists/' . $artist->id . '/delete')}}" method="POST" class="d-inline">
+                                
+                                {{-- delete form --}}
+
+                                <form action="{{route('artists.destroy',['artist' => $artist->id ])}}" method="POST" class="d-inline">
                                     @csrf
                                     @method('delete')
                                     <button type="submit"><i class="fa fa-trash"></i></button>
@@ -146,7 +149,7 @@
             </div>
            
 
-            {{-- Create  Modal --}}
+            {{-- Store  Modal --}}
 
             <div class="modal" id="add-modal" tabindex="-1">
                 <div class="modal-dialog">
@@ -157,10 +160,8 @@
                     </div>
                     <div class="modal-body">
                       
-                        <form action="{{url('artists/create')}}" method="POST">
-
-                            @csrf
-
+                        <form action="{{route('artists.store')}}" method="POST">
+                          @csrf
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
@@ -209,7 +210,7 @@
 
 
 
-                        {{-- Edit  Modal --}}
+                        {{-- Update  Modal --}}
               @foreach($artists as $artist)
 
 
@@ -222,7 +223,7 @@
                     </div>
                     <div class="modal-body">
                       
-                        <form action="{{url('artists/'. $artist->id .'/update')}}" method="POST">
+                        <form action="{{route('artists.update',['artist'=>$artist->id])}}" method="POST">
 
                             @csrf
                             @method("PATCH")
