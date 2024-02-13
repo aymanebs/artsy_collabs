@@ -80,4 +80,21 @@ class Art_projectController extends Controller
         $project->delete();
         return redirect()->route('projects.index');
     }
+
+    // view archive page 
+
+    public function archive(){
+        
+        $projects= Art_project::onlyTrashed()->get();
+        return view('art_project.archive',compact('projects'));
+    }
+
+    // restore project
+
+    public function restore(Art_project $project){
+
+      
+        $project->restore();
+        return redirect()->route('projects.archive');
+    }
 }

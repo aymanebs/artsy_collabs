@@ -20,49 +20,53 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-    Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
-    Route::get('/dashboard', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-    Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Archive and restore routes
+
     
+    Route::get('/projects/archive', [Art_projectController::class,'archive'])->name('projects.archive');
+    Route::get('/projects/restore/{project}', [Art_projectController::class, 'restore'])->name('projects.restore');
 
-    Route::group(['middleware' => 'CheckRole:admin'],function(){
+    Route::group(['middleware' => 'CheckRole:admin'], function () {
 
-         // Art_project
+        // Art_project
 
-        Route::resource('projects',Art_projectController::class)->middleware('CheckRole:admin');
+        Route::resource('projects', Art_projectController::class)->middleware('CheckRole:admin');
+        
 
         // Artists
-    
-        Route::resource('artists',ArtistController::class)->middleware('CheckRole:admin');
-    
-    
-        // Partners
-    
-        Route::resource('partners',PartnerController::class)->middleware('CheckRole:admin');
-    });
-   
 
-   
+        Route::resource('artists', ArtistController::class)->middleware('CheckRole:admin');
+
+
+        // Partners
+
+        Route::resource('partners', PartnerController::class)->middleware('CheckRole:admin');
+    });
+
+
+
 
     //home
 
-    Route::get('/home',[HomeController::class,'index'])->name('home');
-
-
-
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
 
-// Route::get('/details',[Art_projectController::class,'show']);
 
-require __DIR__.'/auth.php';
+Route::get('/details',[Art_projectController::class,'show']);
+
+require __DIR__ . '/auth.php';
