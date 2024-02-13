@@ -16,7 +16,7 @@ class ArtistController extends Controller
     public function index()
     {
         $projects=Art_project::get();
-        $artists=User::get();
+        $artists=User::artists();
         return view('artist.index',compact('artists','projects'));
     }
 

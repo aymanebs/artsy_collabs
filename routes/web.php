@@ -62,4 +62,7 @@ use Illuminate\Support\Facades\Route;
 
 });
 
+
+// Route::get('/details',[Art_projectController::class,'show']);
+
 require __DIR__.'/auth.php';

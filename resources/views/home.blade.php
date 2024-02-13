@@ -19,11 +19,13 @@
                 @foreach($projects as $project)
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
+                        @if($project->hasMedia('images'))
                         <img src="{{$project->getFirstMedia('images')->getUrl()}}" class="card-img-top img-fluid" alt="{{$project->title}}">
+                        @endif
                         <div class="card-body">
                             <h2 class="card-title">{{$project->title}}</h2>
                         </div>
-                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="{{route('projects.show',['project'=>$project->id])}}">More Info</a></div>
                     </div>
                 </div>
                 @endforeach

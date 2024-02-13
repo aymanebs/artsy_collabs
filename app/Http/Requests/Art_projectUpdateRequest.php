@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Art_projectStoreRequest extends FormRequest
+class Art_projectUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,7 @@ class Art_projectStoreRequest extends FormRequest
             'category' => 'required|string|max:255',
             'artists[]' => 'required|exists:artists,id', 
             'partner_id' => 'required|exists:partners,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }

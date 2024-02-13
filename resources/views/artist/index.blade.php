@@ -118,7 +118,7 @@
                     
                     <tbody>
                         @foreach($artists as $artist)
-                        @if($artist -> role_id == 2)
+                        {{-- @if($artist -> role_id == 2) --}}
                         <tr>
                             
                             <td>{{$artist->id}}</td>
@@ -140,7 +140,7 @@
                             
                             </td>
                         </tr>
-                        @endif
+                        {{-- @endif --}}
                      @endforeach    
                            </tbody>
                         </table>

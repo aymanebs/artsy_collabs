@@ -37,7 +37,10 @@
                         <li><a class="dropdown-item" href="{{route('projects.index')}}">Dashboard</a></li>
                         @endcan
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><form method="POST" action="{{ route('logout') }}">
+                            @csrf <!-- Protection contre les attaques CSRF -->
+                            <button type="submit"  style="background: none; border: none; text-decoration: none; cursor: pointer;">Logout</button>
+                        </form></li>
                     </ul>
                 </li>
             </ul>

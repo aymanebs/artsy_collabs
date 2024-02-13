@@ -129,7 +129,7 @@
                             <td>{{$project->budget}}</td>
                             <td>{{$project->description}}</td>
                             <td>{{$project->category}}</td>
-                            <td>{{$project->state}}</td>
+                            <td> {{$project->state}} </td>
                             <td><a  type="button" data-id="{{$project->id}}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{$project->id}}" ><i class="fa fa-edit" ></i></a>
                                 <a ><i class="fa fa-circle-info"></i></a>
 
@@ -155,7 +155,7 @@
            
 
             {{-- Store  Modal --}}
-
+            
             <div class="modal" id="add-modal" tabindex="-1">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -175,26 +175,38 @@
                                         <input class="form-control"  type="text" placeholder="Enter your first name" name="title" />
                                         <label >Title</label>
                                     </div>
-                                    @error <span class="text-danger">{{$message}}</span>@enderror
+                                    {{-- @error('title') <span class="text-danger">{{$message}}</span>@enderror --}}
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input class="form-control"  type="text" placeholder="Enter your last name" name="budget" />
                                         <label >Budget</label>
                                     </div>
+                                    {{-- @error('budget') <span class="text-danger">{{$message}}</span>@enderror --}}
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control"  type="text" placeholder="name@example.com" name="description" />
                                 <label >Description</label>
                             </div>
+                            {{-- @error('description') <span class="text-danger">{{$message}}</span>@enderror --}}
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
                                         <input class="form-control"  type="text" placeholder="Create a password"  name="category"/>
                                         <label >Category</label>
                                     </div>
+                            {{-- @error('category') <span class="text-danger">{{$message}}</span>@enderror --}}
                                 </div>
+                                <div class="col md-6">
+                                    <label>State</label>
+                                    <select class="form-select"  name="state">
+                                        @foreach( ['en_attente','en_cours','termine'] as $state)
+                                        <option value="{{$state}}">{{$state}}</option>
+                                        @endforeach
+                                      </select>
+                                    </div> 
+
                              
                             </div>
                             <div class="row mb-3">
@@ -208,23 +220,26 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                {{-- @error('artists[]') <span class="text-danger">{{$message}}</span>@enderror --}}
                             </div>
                            
                            <div class="row mb-3">
-                            <div class="col md-6"></div>
+                            <div class="col md-6">
                             <label>Partner</label>
                             <select class="form-select"  name="partner_id">
                                 @foreach($partners as $partner)
                                 <option value="{{$partner->id}}">{{$partner->name}}</option>
                                 @endforeach
                               </select>
+                            </div> 
                            </div>
-                          
+                           {{-- @error('partner_id') <span class="text-danger">{{$message}}</span>@enderror --}}
                             
                             <div class="col-md-6">
                                 <div class="form-floating mb-3 mb-md-0">
                                     <input type="file" class="form-control" name="image" >
                             </div>
+                            {{-- @error('image') <span class="text-danger">{{$message}}</span>@enderror --}}
                            </div>
 
                     <div class="modal-footer">
@@ -284,6 +299,15 @@
                                         <label >Category</label>
                                     </div>
                                 </div>
+
+                                <div class="col md-6">
+                                    <label>State</label>
+                                    <select class="form-select"  name="state">
+                                        @foreach( ['en_attente','en_cours','termine'] as $state)
+                                        <option value="{{$state}}">{{$state}}</option>
+                                        @endforeach
+                                      </select>
+                                    </div> 
                             </div>
 
                             <div class="row mb-3">

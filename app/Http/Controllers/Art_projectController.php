@@ -45,7 +45,9 @@ class Art_projectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $project=Art_project::findOrFail($id);
+
+        return view('art_project.details',compact('project'));
     }
 
     /**
