@@ -175,6 +175,7 @@
                                         <input class="form-control"  type="text" placeholder="Enter your first name" name="title" />
                                         <label >Title</label>
                                     </div>
+                                    @error <span class="text-danger">{{$message}}</span>@enderror
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">

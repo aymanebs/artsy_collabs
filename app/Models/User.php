@@ -43,7 +43,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function roles(){
+    public function role(){
         return $this->belongsTo(Role::class);
     }
 
@@ -53,12 +53,7 @@ class User extends Authenticatable
 
     public function hasPermissionTo($permission)
     {
-      
-            if ($this->role->permissions->contains('name', $permission)) {
-                return true;
-            }
-      
-
-        return false;
+        return $this->role->permissions->contains('name', $permission);
     }
+ 
 }
