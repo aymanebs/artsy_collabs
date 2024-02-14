@@ -35,27 +35,16 @@
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                Authentication
+                                
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="login.html">Login</a>
-                                    <a class="nav-link" href="register.html">Register</a>
-                                    <a class="nav-link" href="password.html">Forgot Password</a>
+                                    <a class="nav-link" href="{{route('projects.archive')}}">Archive</a>
+                                 
                                 </nav>
                             </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                Error
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="401.html">401 Page</a>
-                                    <a class="nav-link" href="404.html">404 Page</a>
-                                    <a class="nav-link" href="500.html">500 Page</a>
-                                </nav>
-                            </div>
+                           
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">Addons</div>
@@ -110,6 +99,7 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Description</th>
+                                    <th>Project</th>
                                     <th>Action</th>
                                  
                                 </tr>
@@ -125,6 +115,13 @@
                             <td>{{$partner->id}}</td>
                             <td>{{$partner->name}}</td>
                             <td>{{$partner->description}}</td>
+                            <td>
+                                @foreach ($partner->art_projects as $project)
+                                    {{$project->title}}
+                                    <br>
+                                @endforeach
+                            </td>
+
                             <td><a  type="button" data-id="{{$partner->id}}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{$partner->id}}" ><i class="fa fa-edit" ></i></a>
                                 <a ><i class="fa fa-circle-info"></i></a>
                                 <form action="{{route('partners.destroy',['partner' => $partner->id])}}" method="POST" class="d-inline">
@@ -177,16 +174,7 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="">Projects</label>
-                                    <select name="projects[]" id="">
-                                        @foreach($projects as $project)
-                                        <option value="{{$project->id}}">{{$project->title}} </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> --}}
+                    
                            
                     </div>
                     <div class="modal-footer">

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PartnerStoreRequest;
+use App\Http\Requests\PartnerUpdateRequest;
 use App\Models\Art_project;
 use App\Models\Partner;
 use Illuminate\Http\Request;
@@ -29,7 +31,7 @@ class PartnerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PartnerStoreRequest $request)
     {
         $partner=Partner::create($request->all());
         $projects=$request->input('projects');
@@ -56,7 +58,7 @@ class PartnerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $id)
+    public function update(PartnerUpdateRequest $request, int $id)
     {
         $project=Partner::findorfail($id);
         $project->update($request->all());

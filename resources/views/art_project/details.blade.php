@@ -15,9 +15,19 @@
         <div class="col-lg-6 pt-5">
             <h2 class="fw-bold">{{$project->title}}</h2>
             {{-- <p class="text-muted">Product Category</p> --}}
-            <h3 class="my-4">Description</h3>
+            <h3 class="my-4 pt-5">Description</h3>
             <p class="mb-4">
                 {{$project->description}}
+            </p>
+            <h3 class="my-4">Artists</h3>
+            <p class="mb-4">
+                @foreach ($project->users as $artist)
+                {{$artist->name}}
+                @endforeach
+            </p>
+            <h3 class="my-4">Partner</h3>
+            <p class="mb-4">
+                {{$project->partner->name}}
             </p>
           
         </div>
