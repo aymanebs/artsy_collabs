@@ -26,8 +26,9 @@ class Art_projectUpdateRequest extends FormRequest
             'budget' => 'required|numeric|min:0',
             'description' => 'required|string',
             'category' => 'required|string|max:255',
-            'artists[]' => 'required|exists:artists,id', 
-            'partner_id' => 'required|exists:partners,id',
+            'state' =>'required',
+            // 'artists[]' => 'required|exists:artists,id', 
+            // 'partner_id' => 'required|exists:partners,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }

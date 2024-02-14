@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Art_projectStoreRequest;
+use App\Http\Requests\Art_projectUpdateRequest;
 use App\Models\Art_project;
 use App\Models\Partner;
 use App\Models\User;
@@ -31,7 +33,7 @@ class Art_projectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Art_projectStoreRequest $request)
     {
 
         $project=Art_project::create($request->all());
@@ -61,11 +63,14 @@ class Art_projectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Art_project $project)
+    public function update(Art_projectUpdateRequest $request, Art_project $project)
     {
-        $project->clearMediaCollection('images');
+        if($request->hasfile('image')){
+            $project->clearMediaCollection('images');
+            $project->addMediaFromRequest('image')->toMediaCollection('images');
+        }
         $project->update($request->all());
-        $project->addMediaFromRequest('image')->toMediaCollection('images');
+     
         $project->users()->sync($request->input('artists'));
         return redirect()->route('projects.index');
     }

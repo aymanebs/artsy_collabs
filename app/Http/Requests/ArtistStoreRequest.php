@@ -22,8 +22,8 @@ class ArtistStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email|max:255',
+            'name' => 'required|string|max:20',
+            // 'email' => 'required|email|unique:users|max:15',
             'password' => 'required|string|min:8',
         ];
     }

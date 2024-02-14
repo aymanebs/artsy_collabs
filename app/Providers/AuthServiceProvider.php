@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         FacadesGate::define('access.dashboard',function($user){
-            return $user->hasPermissionTo('access.dashboard');
+            return $user->role->hasPermissionTo('access.dashboard');
         });
     }
 }

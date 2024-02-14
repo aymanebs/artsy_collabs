@@ -53,10 +53,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Art_project::class);
     }
 
-    public function hasPermissionTo($permission)
-    {
-        return $this->role->permissions->contains('name', $permission);
-    }
+  
     
     public static function artists()
     {

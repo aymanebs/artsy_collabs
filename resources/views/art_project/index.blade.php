@@ -187,14 +187,14 @@
                                     </div>
                             {{-- @error('category') <span class="text-danger">{{$message}}</span>@enderror --}}
                                 </div>
-                                <div class="col md-6">
+                                {{-- <div class="col md-6">
                                     <label>State</label>
                                     <select class="form-select"  name="state">
                                         @foreach( ['en_attente','en_cours','termine'] as $state)
                                         <option value="{{$state}}">{{$state}}</option>
                                         @endforeach
                                       </select>
-                                    </div> 
+                                    </div>  --}}
 
                              
                             </div>

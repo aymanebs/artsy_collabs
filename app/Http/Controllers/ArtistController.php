@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Art_projectStoreRequest;
+use App\Http\Requests\ArtistStoreRequest;
 use App\Models\Art_project;
 use App\Models\Artist;
 use App\Models\User;
@@ -31,7 +33,7 @@ class ArtistController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ArtistStoreRequest $request)
     {   
         $data=$request->all();
         $data['password'] = Hash::make($request->password); 
@@ -61,7 +63,7 @@ class ArtistController extends Controller
      */
     public function update(Request $request,User $artist)
     {
-        $artist->update();
+        $artist->update($request->all());
         $artist->projects()->sync($request->input('projects'));
         return redirect()->route('artists.index');
     }

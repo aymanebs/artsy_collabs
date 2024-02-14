@@ -23,11 +23,11 @@ class Art_projectStoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'budget' => 'required|numeric|min:0',
+            'budget' => 'required|string|min:0',
             'description' => 'required|string',
             'category' => 'required|string|max:255',
-            'artists[]' => 'required|exists:artists,id', 
-            'partner_id' => 'required|exists:partners,id',
+            // 'artists' => 'required|exists:users,id', 
+            // 'partner_id' => 'required|exists:partners,id',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }

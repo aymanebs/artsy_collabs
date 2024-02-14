@@ -110,6 +110,7 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Projects</th>
                                     <th>Action</th>  
                                 </tr>
                             </thead>
@@ -124,6 +125,16 @@
                             <td>{{$artist->id}}</td>
                             <td>{{$artist->name}}</td>
                             <td>{{$artist->email}}</td>
+                           
+                            <td>
+                                @foreach ($artist->projects as $project)
+                                
+                                {{$project->title}}
+                                <br>
+                                @endforeach
+                            </td>  
+                          
+                            
                             <td><a  type="button" data-id="{{$artist->id}}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{$artist->id}}" ><i class="fa fa-edit" ></i></a>
                                 <a ><i class="fa fa-circle-info"></i></a>
                                 
