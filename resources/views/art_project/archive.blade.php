@@ -12,6 +12,7 @@
                         Dashboard
                     </a>
                     <div class="sb-sidenav-menu-heading">Interface</div>
+                    
                      {{-- tables navigation start --}}
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -27,26 +28,26 @@
                         </nav>
                     </div>
                       {{-- tables navigation end --}}
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        Pages
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{route('projects.archive')}}">Archive</a>
-                                 
-                                </nav>
-                            </div>
-                           
-                        </nav>
-                    </div>
+
+                         {{-- archive navigation start --}}
+            
+                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Archive
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{route('projects.archive')}}">Archive</a>
+                                <a class="nav-link" href="{{route('applications.index')}}">Applications</a>
+                            </nav>
+                        </div>
+                          {{-- archive navigation end --}}
+
+
+                    
+             
+                
                     <div class="sb-sidenav-menu-heading">Addons</div>
                     <a class="nav-link" href="charts.html">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -74,11 +75,7 @@
                     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                     <li class="breadcrumb-item active">Tables</li>
                 </ol>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <a href="" class="btn btn-primary float-end" role="button"  data-bs-toggle="modal" data-bs-target="#add-modal" >Add</a>
-                    </div>
-                </div>
+            
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
@@ -107,7 +104,7 @@
                                     <td>{{$project->budget}}</td>
                                     <td>{{$project->description}}</td>
                                     <td>{{$project->category}}</td>
-                                    <td> {{$project->state}} </td>
+                                    <td>{{$project->state}}</td>
                                     <td><a  type="button" href="{{route('projects.restore',['project'=>$project->id])}}" ><i class="fa fa-history" ></i></a></td>
                                        
                                     

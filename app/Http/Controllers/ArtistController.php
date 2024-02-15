@@ -8,6 +8,7 @@ use App\Models\Art_project;
 use App\Models\Artist;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ArtistController extends Controller
@@ -76,5 +77,15 @@ class ArtistController extends Controller
         $artist->projects()->detach();
         $artist->delete();
         return redirect()->route('artists.index');
+    }
+
+    public function apply(string $id){
+
+        
+        $project=Art_project::findorFail($id);
+        Auth::user()->projects()->attach($project->id);
+        return redirect()->route('home');
+
+
     }
 }

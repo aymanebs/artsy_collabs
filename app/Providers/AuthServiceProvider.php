@@ -30,5 +30,10 @@ class AuthServiceProvider extends ServiceProvider
         FacadesGate::define('access.dashboard',function($user){
             return $user->role->hasPermissionTo('access.dashboard');
         });
+
+        FacadesGate::define('apply',function($user){
+            return $user->role->hasPermissionTo('apply');
+        });
+
     }
 }

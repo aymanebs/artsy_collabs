@@ -50,7 +50,7 @@ class User extends Authenticatable
     }
 
     public function projects(){
-        return $this->belongsToMany(Art_project::class);
+        return $this->belongsToMany(Art_project::class)->withPivot('application');
     }
 
   
@@ -61,4 +61,10 @@ class User extends Authenticatable
             $query->where('name', 'artist');
         })->get();
     }
+
+
+
+
+
+    
 }

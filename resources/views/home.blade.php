@@ -12,7 +12,7 @@
             </div>
             <!-- Call to Action-->
             <div class="card text-white bg-secondary my-5 py-4 text-center">
-                <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
+                <div class="card-body"><p class="text-white m-0"> Artisistic projects and collaborations</p></div>
             </div>
             <!-- Content Row-->
             <div class="row gx-4 gx-lg-5">
@@ -26,6 +26,9 @@
                             <h2 class="card-title">{{$project->title}}</h2>
                         </div>
                         <div class="card-footer"><a class="btn btn-primary btn-sm" href="{{route('projects.show',['project'=>$project->id])}}">More Info</a></div>
+                        @can('apply')
+                        <div class="card-footer"><a class="btn btn-success btn-sm" href="{{route('artists.apply',['project'=>$project->id])}}">Apply</a></div>
+                        @endcan
                     </div>
                 </div>
                 @endforeach

@@ -29,10 +29,12 @@ class Art_project extends Model implements HasMedia
 
 
     public function users(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('application');
     }
 
     public function partner(){
         return $this->belongsTo(Partner::class);
     }
+
+   
 }

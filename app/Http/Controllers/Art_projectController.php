@@ -96,10 +96,10 @@ class Art_projectController extends Controller
 
     // restore project
 
-    public function restore(Art_project $project){
+    public function restore(string $id){
 
-      
+        $project=Art_project::withTrashed()->findOrFail($id);
         $project->restore();
-        return redirect()->route('projects.archive');
+        return redirect()->route('projects.index');
     }
 }

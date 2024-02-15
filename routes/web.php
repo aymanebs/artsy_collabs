@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Art_projectController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\HomeController;
@@ -34,31 +35,46 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Archive and restore routes
+    
 
     
-    Route::get('/projects/archive', [Art_projectController::class,'archive'])->name('projects.archive');
-    Route::get('/projects/restore/{project}', [Art_projectController::class, 'restore'])->name('projects.restore');
+
+  
+   
+    // admin route goup
 
     Route::group(['middleware' => 'CheckRole:admin'], function () {
 
         // Art_project
 
+        Route::get('/projects/archive', [Art_projectController::class,'archive'])->name('projects.archive');
+        Route::get('/projects/restore/{project}',[Art_projectController::class, 'restore'])->name('projects.restore');
         Route::resource('projects', Art_projectController::class)->middleware('CheckRole:admin');
         
 
         // Artists
-
-        Route::resource('artists', ArtistController::class)->middleware('CheckRole:admin');
+        
+        Route::resource('artists', ArtistController::class);
 
 
         // Partners
 
-        Route::resource('partners', PartnerController::class)->middleware('CheckRole:admin');
+        Route::resource('partners', PartnerController::class);
+
+        //applications
+
+        Route::get('/applications',[ApplicationController::class,'index'])->name('applications.index');
+
     });
 
 
+     // artist route goup
 
+    Route::group(['middleware' => 'CheckRole:artist'], function () {
+
+    Route::get('/artists/apply/{project}',[ArtistController::class,'apply'])->name('artists.apply');
+
+    });
 
     //home
 
